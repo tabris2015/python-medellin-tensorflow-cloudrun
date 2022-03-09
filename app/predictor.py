@@ -18,7 +18,7 @@ class Predictor:
         pred = self.model.predict(image.reshape(-1, self.image_size, self.image_size, 3))
         top_labels = {}
         if len(self.labels) >= n_top:
-            top_labels_ids = np.flip(np.argsort(pred, axis=1)[0, -3:])
+            top_labels_ids = np.flip(np.argsort(pred, axis=1)[0, -n_top:])
             for label_id in top_labels_ids:
                 top_labels[self.labels[label_id]] = pred[0,label_id].item()
         pred_label = self.labels[np.argmax(pred)]
